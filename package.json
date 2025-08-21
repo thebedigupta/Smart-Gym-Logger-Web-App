@@ -1,0 +1,47 @@
+{
+  "name": "smart-gym-logger-app",
+  "version": "1.0.0",
+  "description": "A comprehensive web application for tracking and logging gym workouts",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "start": "concurrently \"npm run server:start\" \"npm run client:start\"",
+    "server:dev": "cd server && npm run dev",
+    "server:start": "cd server && npm start",
+    "client:dev": "cd client && npm run dev",
+    "client:start": "cd client && npm run preview",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build",
+    "build:server": "echo Server build not needed for Node.js",
+    "server:only": "cd server && npm run dev",
+    "client:only": "cd client && npm run dev",
+    "clean": "rimraf node_modules server/node_modules client/node_modules",
+    "clean:install": "npm run clean && npm run install:all",
+    "setup": "npm run install:all && echo Setup complete! Run 'npm run dev' to start both servers",
+    "health": "curl http://localhost:5000/api/health || echo Server not running",
+    "logs:server": "cd server && npm run dev",
+    "logs:client": "cd client && npm run dev"
+  },
+  "keywords": [
+    "gym",
+    "fitness",
+    "workout",
+    "tracker",
+    "react",
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "Bedi Gupta",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thebedigupta/Smart-Gym-Logger-Web-App.git"
+  }
+}

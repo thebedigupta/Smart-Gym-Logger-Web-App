@@ -66,51 +66,64 @@ Smart-Gym-Logger-Web-App/
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- npm or yarn package manager
+- npm package manager
 
-### Installation
+### One-Command Setup & Start
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/thebedigupta/Smart-Gym-Logger-Web-App.git
    cd Smart-Gym-Logger-Web-App
    ```
 
-2. **Install server dependencies**
+2. **Install all dependencies**
    ```bash
-   cd server
-   npm install
+   npm run install:all
    ```
 
-3. **Install client dependencies**
+3. **Configure environment variables**
    ```bash
-   cd ../client
-   npm install
+   # Copy and edit server environment file
+   cp server/.env.example server/.env
+   
+   # Copy and edit client environment file  
+   cp client/.env.example client/.env
    ```
 
-4. **Configure environment variables**
+4. **Start both servers with ONE command! 🚀**
    ```bash
-   cd ../server
-   # Edit .env file with your configuration
-   ```
-
-5. **Start the development servers**
-
-   **Terminal 1 - Backend:**
-   ```bash
-   cd server
    npm run dev
    ```
 
-   **Terminal 2 - Frontend:**
-   ```bash
-   cd client
-   npm run dev
-   ```
+   That's it! Both frontend and backend will start simultaneously.
 
-6. **Open your browser**
-   - Frontend: http://localhost:5173
+5. **Open your browser**
+   - Frontend: http://localhost:5173 (or 5174 if 5173 is busy)
    - Backend API: http://localhost:5000/api/health
+
+### Alternative Setup Methods
+
+**Windows Users:**
+```bash
+# Run the setup script
+setup.bat
+```
+
+**Linux/Mac Users:**
+```bash
+# Make script executable and run
+chmod +x setup.sh
+./setup.sh
+```
+
+### Available Commands
+```bash
+npm run dev          # 🚀 Start both client and server
+npm run server:dev   # 🖥️  Start only server
+npm run client:dev   # 💻 Start only client  
+npm run build        # 📦 Build for production
+npm run install:all  # 📥 Install all dependencies
+```
 
 ## 🌐 API Endpoints
 
