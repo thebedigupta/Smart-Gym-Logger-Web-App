@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { 
   Dumbbell, 
   Calendar, 
@@ -17,6 +17,20 @@ import ExerciseLogger from '../components/ExerciseLogger'
 const Dashboard = () => {
   const [isExerciseLoggerOpen, setIsExerciseLoggerOpen] = useState(false)
   const [recentExercises, setRecentExercises] = useState([])
+  const [user, setUser] = useState(null)
+
+  // Get user data from localStorage
+  useEffect(() => {
+    const userData = localStorage.getItem('user')
+    if (userData) {
+      try {
+        const parsedUser = JSON.parse(userData)
+        setUser(parsedUser)
+      } catch (error) {
+        console.error('Error parsing user data:', error)
+      }
+    }
+  }, [])
 
   const recentWorkouts = [
     {
@@ -82,7 +96,9 @@ const Dashboard = () => {
       description: "Begin a new training session",
       icon: <Dumbbell className="w-8 h-8" />,
       color: "bg-indigo-600 hover:bg-indigo-700",
-      onClick: () => console.log('Start workout clicked')
+      onClick: () => {
+        // TODO: Implement start workout functionality
+      }
     },
     {
       title: "Log Exercise",
@@ -96,14 +112,18 @@ const Dashboard = () => {
       description: "Check your fitness analytics",
       icon: <TrendingUp className="w-8 h-8" />,
       color: "bg-purple-600 hover:bg-purple-700",
-      onClick: () => console.log('View progress clicked')
+      onClick: () => {
+        // TODO: Implement view progress functionality
+      }
     },
     {
       title: "Set Goals",
       description: "Update your fitness targets",
       icon: <Target className="w-8 h-8" />,
       color: "bg-orange-600 hover:bg-orange-700",
-      onClick: () => console.log('Set goals clicked')
+      onClick: () => {
+        // TODO: Implement set goals functionality
+      }
     }
   ]
 
@@ -111,9 +131,6 @@ const Dashboard = () => {
     try {
       // Add to recent exercises for display
       setRecentExercises(prev => [exerciseLog, ...prev.slice(0, 4)])
-      
-      // Here you would normally save to backend
-      console.log('Exercise logged:', exerciseLog)
       
       // Show success message with exercise details
       const setsInfo = exerciseLog.sets.map((set, i) => 
@@ -149,7 +166,15 @@ const Dashboard = () => {
                 <span className="hidden sm:inline">New Workout</span>
                 <span className="sm:hidden">New</span>
               </button>
-              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-300 rounded-full"></div>
+              
+              {/* User Avatar */}
+              <div className="relative">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-indigo-600 rounded-full flex items-center justify-center">
+                  <span className="text-white text-xs sm:text-sm font-medium">
+                    {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -164,7 +189,7 @@ const Dashboard = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-            Welcome back, John! 💪
+            Welcome back, {user?.name || 'Fitness Enthusiast'}! 💪
           </h2>
           <p className="text-gray-600 text-sm sm:text-base">
             Ready to crush your fitness goals today? Here's your progress overview.

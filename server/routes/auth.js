@@ -182,11 +182,14 @@ router.post('/google', async (req, res) => {
         user.googleId = googleUser.googleId;
         user.authProvider = 'google';
         user.isEmailVerified = googleUser.emailVerified;
-        if (googleUser.avatar && !user.avatar) {
-          user.avatar = googleUser.avatar;
-        }
-        await user.save();
       }
+      
+      // Always update avatar for Google users (in case they changed their profile picture)
+      if (googleUser.avatar) {
+        user.avatar = googleUser.avatar;
+      }
+      
+      await user.save();
     } else {
       // Create new user
       user = new User({
