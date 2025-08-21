@@ -96,9 +96,7 @@ const Dashboard = () => {
       description: "Begin a new training session",
       icon: <Dumbbell className="w-8 h-8" />,
       color: "bg-indigo-600 hover:bg-indigo-700",
-      onClick: () => {
-        // TODO: Implement start workout functionality
-      }
+      onClick: () => setIsExerciseLoggerOpen(true)
     },
     {
       title: "Log Exercise",
@@ -112,18 +110,14 @@ const Dashboard = () => {
       description: "Check your fitness analytics",
       icon: <TrendingUp className="w-8 h-8" />,
       color: "bg-purple-600 hover:bg-purple-700",
-      onClick: () => {
-        // TODO: Implement view progress functionality
-      }
+      onClick: () => {} // TODO: Implement progress view
     },
     {
       title: "Set Goals",
       description: "Update your fitness targets",
       icon: <Target className="w-8 h-8" />,
       color: "bg-orange-600 hover:bg-orange-700",
-      onClick: () => {
-        // TODO: Implement set goals functionality
-      }
+      onClick: () => {} // TODO: Implement goal setting
     }
   ]
 
@@ -131,6 +125,9 @@ const Dashboard = () => {
     try {
       // Add to recent exercises for display
       setRecentExercises(prev => [exerciseLog, ...prev.slice(0, 4)])
+      
+      // Here you would normally save to backend
+      // TODO: Implement backend API call
       
       // Show success message with exercise details
       const setsInfo = exerciseLog.sets.map((set, i) => 

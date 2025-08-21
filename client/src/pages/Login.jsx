@@ -62,6 +62,8 @@ const Login = () => {
         } catch (initError) {
           console.error('Error initializing Google Sign-In:', initError)
         }
+      } else {
+        console.error('Google accounts API not available')
       }
     }
 
